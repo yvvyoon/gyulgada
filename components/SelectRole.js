@@ -13,13 +13,13 @@ export default function App() {
 					<View style={styles.leftItem}>
 						<Image
 							style={{ height: '80%', width: '80%' }}
-							source={require('./public/images/apply.png')}
+							source={require('../public/images/apply.png')}
 						/>
 					</View>
 					<View style={styles.rightItem}>
 						<Image
 							style={{ height: '80%', width: '80%' }}
-							source={require('./public/images/recruit.png')}
+							source={require('../public/images/recruit.png')}
 						/>
 					</View>
 				</View>
@@ -55,19 +55,19 @@ const styles = StyleSheet.create({
 		marginRight: 5,
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: '#808080',
+		// backgroundColor: '#808080',
 	},
 	rightItem: {
 		flex: 1,
 		marginLeft: 5,
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: '#808080',
+		// backgroundColor: '#808080',
 	},
 	itemContainer: {
 		flex: 3,
 		flexDirection: 'row',
-		backgroundColor: '#d3d3d3',
+		// backgroundColor: '#d3d3d3',
 		paddingVertical: 10,
 		paddingHorizontal: 10,
 	},
