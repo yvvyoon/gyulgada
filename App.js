@@ -3,14 +3,34 @@ import { StyleSheet, Text, View, TextInput } from 'react-native';
 import SelectRole from './components/SelectRole';
 import TypePhone from './components/TypePhone';
 import MyPage from './components/MyPage';
+import GoToWork from './components/GoToWork';
+import LeaveWork from './components/LeaveWork';
+import Contract from './components/Contract';
 
-export default function App() {
-	return (
-		<View style={styles.container}>
-			{/* <SelectRole></SelectRole> */}
-			<MyPage></MyPage>
-		</View>
-	);
+export default class App extends React.Component {
+	state = {
+		timestamp: [],
+	};
+
+	logTimestamp = () => {
+		const currTime = new Date().toLocaleTimeString();
+
+		this.setState({ timestamp: currTime });
+	};
+
+	render() {
+		return (
+			<View style={styles.container}>
+				{/* <SelectRole></SelectRole> */}
+				{/* <TypePhone></TypePhone> */}
+				{/* <MyPage></MyPage> */}
+				{/* <Sidebar></Sidebar> */}
+				{/* <GoToWork logTimestamp={this.logTimestamp}></GoToWork> */}
+				{/* <LeaveWork></LeaveWork> */}
+				<Contract></Contract>
+			</View>
+		);
+	}
 }
 
 const styles = StyleSheet.create({

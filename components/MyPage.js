@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import Sidebar from './Sidebar';
 
 export default function MyPage() {
 	return (
@@ -79,7 +80,6 @@ const styles = StyleSheet.create({
 	header: {
 		flex: 1,
 		flexDirection: 'row',
-		// backgroundColor: '#ff0000',
 		justifyContent: 'center',
 		marginBottom: 40,
 	},
@@ -95,7 +95,6 @@ const styles = StyleSheet.create({
 	},
 	headerRight: {
 		flex: 1,
-		// backgroundColor: '#d3d3d3',
 		alignItems: 'flex-end',
 		justifyContent: 'center',
 	},
@@ -112,7 +111,6 @@ const styles = StyleSheet.create({
 	myInfoSummaryRight: {
 		flex: 2,
 		justifyContent: 'center',
-		// backgroundColor: '#d3d3d3',
 		paddingLeft: 20,
 	},
 	titleMyInfoSummary: {
@@ -125,7 +123,6 @@ const styles = StyleSheet.create({
 	},
 	workScore: {
 		flex: 1,
-		// backgroundColor: '#008000',
 		marginBottom: 40,
 		alignItems: 'center',
 	},
@@ -135,7 +132,6 @@ const styles = StyleSheet.create({
 	},
 	myInfoDetail: {
 		flex: 1,
-		// backgroundColor: '#800080',
 	},
 	myInfoDetailBox: {
 		borderBottomColor: '#d3d3d3',
