@@ -35,19 +35,19 @@ export default function GoToWork({ logTimestamp }) {
 				</View>
 				<View style={{ marginTop: 30 }}>
 					<Text style={styles.logText}>
-						2019년 10월 30일 20:45:03
+						☑️{'\t'}2019년 10월 30일 20:45:03
 					</Text>
 					<Text style={styles.logText}>
-						2019년 10월 30일 20:45:03
+						☑️{'\t'}2019년 10월 30일 20:45:03
 					</Text>
 					<Text style={styles.logText}>
-						2019년 10월 30일 20:45:03
+						☑️{'\t'}2019년 10월 30일 20:45:03
 					</Text>
 					<Text style={styles.logText}>
-						2019년 10월 30일 20:45:03
+						☑️{'\t'}2019년 10월 30일 20:45:03
 					</Text>
 					<Text style={styles.logText}>
-						2019년 10월 30일 20:45:03
+						☑️{'\t'}2019년 10월 30일 20:45:03
 					</Text>
 				</View>
 			</View>

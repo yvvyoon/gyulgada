@@ -33,14 +33,20 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center',
+		marginTop: 50,
+		marginHorizontal: 10,
 	},
 	topContainer: {
 		flex: 1,
 		justifyContent: 'center',
+		// borderWidth: 1,
+		// borderColor: '#000000',
 	},
 	bottomContainer: {
 		flex: 1,
 		backgroundColor: '#ffffff',
+		// borderWidth: 1,
+		// borderColor: '#000000',
 	},
 	title: {
 		fontSize: 20,
@@ -49,26 +55,27 @@ const styles = StyleSheet.create({
 		flex: 2,
 		paddingLeft: 10,
 		marginTop: 40,
+		// borderWidth: 1,
+		// borderColor: '#000000',
 	},
 	leftItem: {
 		flex: 1,
 		marginRight: 5,
 		alignItems: 'center',
 		justifyContent: 'center',
-		// backgroundColor: '#808080',
 	},
 	rightItem: {
 		flex: 1,
 		marginLeft: 5,
 		alignItems: 'center',
 		justifyContent: 'center',
-		// backgroundColor: '#808080',
 	},
 	itemContainer: {
 		flex: 3,
 		flexDirection: 'row',
-		// backgroundColor: '#d3d3d3',
 		paddingVertical: 10,
 		paddingHorizontal: 10,
+		// borderWidth: 1,
+		// borderColor: '#000000',
 	},
 });

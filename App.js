@@ -21,8 +21,8 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				{/* <SelectRole></SelectRole> */}
 				{/* <TypePhone></TypePhone> */}
+				{/* <SelectRole></SelectRole> */}
 				{/* <MyPage></MyPage> */}
 				{/* <Sidebar></Sidebar> */}
 				{/* <GoToWork logTimestamp={this.logTimestamp}></GoToWork> */}

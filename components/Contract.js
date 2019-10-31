@@ -17,34 +17,35 @@ export default function Contract() {
 				</View>
 				<View style={styles.contentContainer}>
 					<Text style={styles.contentSubTitleText}>
-						서울특별시 관악구 문성로38길 32-10에 소재한
-						귤가다하우스(이하 "사업주"라 칭한다) 선과장과 아르바이트
-						근무자 윤영욱(이하 "근로자"라 칭한다)는 다음과 같이
-						아르바이트 계약을 체결한다.
+						ㅇㅇ시 ㅇㅇ구 ㅇㅇ길 ㅇㅇ에 소재한 귤가다하우스(이하
+						"사업주"라 칭한다) 선과장과 아르바이트 근무자
+						ㅇㅇㅇ(이하 "근로자"라 칭한다)는 다음과 같이 아르바이트
+						계약을 체결한다.
 					</Text>
 					<Text style={styles.contentTitleText}>
 						[제1조] 근무시간
 					</Text>
 					<Text style={styles.contentSubTitleText}>
-						1) 근무시간: {'\n'}2) 휴게시간: {'\n'}3) 휴무일:
+						1) 근무시간: ㅇㅇ시간 ㅇㅇ분{'\n'}2) 휴게시간: ㅇㅇ시간
+						ㅇㅇ분{'\n'}3) 휴무일: 매주 ㅇ요일
 					</Text>
 					<Text style={styles.contentTitleText}>
 						[제2조] 계약기간
 					</Text>
 					<Text style={styles.contentSubTitleText}>
-						1) 본 계약서 작성일로부터 1년간 유효한다.{'\n'}2)
-						아르바이트를 그만둘 시에는 20일 이전에 "사업주"에게
+						1) 본 계약서 작성일로부터 ㅇ년간 유효한다.{'\n'}2)
+						아르바이트를 그만둘 시에는 ㅇㅇ일 이전에 "사업주"에게
 						통지하여 후임자를 뽑을 수 있도록 하여야 한다.
 					</Text>
 					<Text style={styles.contentTitleText}>[제3조] 급여</Text>
 					<Text style={styles.contentSubTitleText}>
-						1) 시간당 일급 10,000원정(W 10,000)으로 계산하여 매월
-						말일 정산하여 익월 10일에 "근로자"의 계좌로
-						현금입금한다.{'\n'}
-						2) 지각이 00분을 초과할 시에는 0시간의 임금을 공제하며
-						00분 이상 지각횟수가 0개월 0회 이상이 될 시에는 0일치
-						급여를 공제한다. 이러한 경우 "사업주"는 근로관계의
-						종료를 취할 수 있다.
+						1) 시간당 일급 ㅇㅇ,ㅇㅇㅇ원정(W ㅇㅇ,ㅇㅇㅇ)으로
+						계산하여 매월 말일 정산하여 익월 ㅇㅇ일에 "근로자"의
+						계좌로 현금입금한다.{'\n'}
+						2) 지각이 ㅇㅇ분을 초과할 시에는 ㅇㅇ시간의 임금을
+						공제하며 ㅇㅇ분 이상 지각횟수가 ㅇ개월 ㅇ회 이상이 될
+						시에는 ㅇ일치 급여를 공제한다. 이러한 경우 "사업주"는
+						근로관계의 종료를 취할 수 있다.
 					</Text>
 					<Text style={styles.contentTitleText}>
 						[제4조] 근무수칙
@@ -77,11 +78,18 @@ export default function Contract() {
 						희망하는 부족물품에 대하여 점장에게 통지한다.
 					</Text>
 				</View>
-				<View style={styles.btnContainer}>
-					<Text style={styles.contentSubTitleText}>
-						ㅅㅂ 버튼자리임
-					</Text>
-				</View>
+				<TouchableOpacity>
+					<View style={styles.btnContainer}>
+						<Text
+							style={styles.btnText}
+							onPress={() => {
+								alert('이전 화면으로 돌아가기');
+							}}
+						>
+							완 료
+						</Text>
+					</View>
+				</TouchableOpacity>
 			</View>
 		</ScrollView>
 	);
@@ -113,6 +121,9 @@ const styles = StyleSheet.create({
 		// borderColor: '#000000',
 		paddingTop: 10,
 		paddingBottom: 10,
+		marginBottom: 10,
+		borderBottomWidth: 1,
+		borderBottomColor: '#d3d3d3',
 	},
 	contentTitleText: {
 		fontSize: 12,
@@ -129,5 +140,14 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		// borderWidth: 1,
 		// borderColor: '#000000',
+		backgroundColor: 'orange',
+		borderRadius: 5,
+		marginBottom: 20,
+	},
+	btnText: {
+		fontSize: 30,
+		fontWeight: 'bold',
+		color: '#000000',
+		paddingVertical: 10,
 	},
 });
