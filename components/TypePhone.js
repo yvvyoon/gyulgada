@@ -1,20 +1,22 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 
-export default function App() {
-	return (
-		<View style={styles.container}>
-			<View style={styles.halfContainer}>
-				<Text style={styles.title}>휴대폰 번호를 입력해주세요</Text>
-				<Text style={styles.subtitle}>휴대폰 번호</Text>
-				<TextInput
-					style={styles.textInput}
-					keyboardType="phone-pad"
-					placeholder="하이픈(-) 없이 입력해주세요."
-				></TextInput>
+export default class TypePhone extends React.Component {
+	render() {
+		return (
+			<View style={styles.container}>
+				<View style={styles.halfContainer}>
+					<Text style={styles.title}>휴대폰 번호를 입력해주세요</Text>
+					<Text style={styles.subtitle}>휴대폰 번호</Text>
+					<TextInput
+						style={styles.textInput}
+						keyboardType="phone-pad"
+						placeholder="하이픈(-) 없이 입력해주세요."
+					></TextInput>
+				</View>
 			</View>
-		</View>
-	);
+		);
+	}
 }
 
 const styles = StyleSheet.create({

@@ -4,71 +4,81 @@ import { Feather } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import Sidebar from './Sidebar';
 
-export default function MyPage() {
-	return (
-		<ScrollView alwaysBounceVertical="true">
-			<View style={styles.inContainer}>
-				<View style={styles.header}>
-					<View style={styles.headerLeft}>
-						<Text style={styles.textHeader}>프로필</Text>
+export default class MyPage extends React.Component {
+	render() {
+		return (
+			<ScrollView alwaysBounceVertical="true">
+				<View style={styles.inContainer}>
+					<View style={styles.header}>
+						<View style={styles.headerLeft}>
+							<Text style={styles.textHeader}>프로필</Text>
+						</View>
+						<View style={styles.headerRight}>
+							<Feather
+								name="settings"
+								size="32"
+								color="orange"
+							></Feather>
+						</View>
 					</View>
-					<View style={styles.headerRight}>
-						<Feather
-							name="settings"
-							size="32"
-							color="orange"
-						></Feather>
+					<View style={styles.myInfoSummary}>
+						<View style={styles.myInfoSummaryLeft}>
+							<Ionicons
+								name="ios-person-add"
+								size="80"
+								color="orange"
+							></Ionicons>
+						</View>
+						<View style={styles.myInfoSummaryRight}>
+							<Text style={styles.titleMyInfoSummary}>
+								윤영욱
+							</Text>
+							<Text style={styles.subtitleMyInfoSummary}>
+								만 27세, 남자
+							</Text>
+						</View>
 					</View>
-				</View>
-				<View style={styles.myInfoSummary}>
-					<View style={styles.myInfoSummaryLeft}>
-						<Ionicons
-							name="ios-person-add"
-							size="80"
-							color="orange"
-						></Ionicons>
-					</View>
-					<View style={styles.myInfoSummaryRight}>
-						<Text style={styles.titleMyInfoSummary}>윤영욱</Text>
-						<Text style={styles.subtitleMyInfoSummary}>
-							만 27세, 남자
+					<View style={styles.workScore}>
+						<Text style={styles.textWorkScore}>
+							나의 근무태도 점수는 4.5점입니다.
+						</Text>
+						<Text style={styles.textWorkScore}>(게이지)</Text>
+						<Text style={styles.textWorkScore}>
+							근무태도 점수를 높이면 채용될 확률이 높아집니다.
 						</Text>
 					</View>
-				</View>
-				<View style={styles.workScore}>
-					<Text style={styles.textWorkScore}>
-						나의 근무태도 점수는 4.5점입니다.
-					</Text>
-					<Text style={styles.textWorkScore}>(게이지)</Text>
-					<Text style={styles.textWorkScore}>
-						근무태도 점수를 높이면 채용될 확률이 높아집니다.
-					</Text>
-				</View>
-				<View style={styles.myInfoDetail}>
-					<View style={styles.myInfoDetailBox}>
-						<Text style={styles.titleMyInfoDetail}>성명</Text>
-						<Text style={styles.contentMyInfoDetail}>윤영욱</Text>
-					</View>
-					<View style={styles.myInfoDetailBox}>
-						<Text style={styles.titleMyInfoDetail}>성별</Text>
-						<Text style={styles.contentMyInfoDetail}>남자</Text>
-					</View>
-					<View style={styles.myInfoDetailBox}>
-						<Text style={styles.titleMyInfoDetail}>생년월일</Text>
-						<Text style={styles.contentMyInfoDetail}>
-							1992-07-22
-						</Text>
-					</View>
-					<View style={styles.myInfoDetailBox}>
-						<Text style={styles.titleMyInfoDetail}>휴대폰번호</Text>
-						<Text style={styles.contentMyInfoDetail}>
-							01054884480
-						</Text>
+					<View style={styles.myInfoDetail}>
+						<View style={styles.myInfoDetailBox}>
+							<Text style={styles.titleMyInfoDetail}>성명</Text>
+							<Text style={styles.contentMyInfoDetail}>
+								윤영욱
+							</Text>
+						</View>
+						<View style={styles.myInfoDetailBox}>
+							<Text style={styles.titleMyInfoDetail}>성별</Text>
+							<Text style={styles.contentMyInfoDetail}>남자</Text>
+						</View>
+						<View style={styles.myInfoDetailBox}>
+							<Text style={styles.titleMyInfoDetail}>
+								생년월일
+							</Text>
+							<Text style={styles.contentMyInfoDetail}>
+								1992-07-22
+							</Text>
+						</View>
+						<View style={styles.myInfoDetailBox}>
+							<Text style={styles.titleMyInfoDetail}>
+								휴대폰번호
+							</Text>
+							<Text style={styles.contentMyInfoDetail}>
+								01054884480
+							</Text>
+						</View>
 					</View>
 				</View>
-			</View>
-		</ScrollView>
-	);
+			</ScrollView>
+		);
+	}
 }
 
 const styles = StyleSheet.create({

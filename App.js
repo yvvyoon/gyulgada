@@ -22,12 +22,12 @@ export default class App extends React.Component {
 		return (
 			<View style={styles.container}>
 				{/* <TypePhone></TypePhone> */}
-				{/* <SelectRole></SelectRole> */}
+				<SelectRole></SelectRole>
 				{/* <MyPage></MyPage> */}
 				{/* <Sidebar></Sidebar> */}
 				{/* <GoToWork logTimestamp={this.logTimestamp}></GoToWork> */}
 				{/* <LeaveWork></LeaveWork> */}
-				<Contract></Contract>
+				{/* <Contract></Contract> */}
 			</View>
 		);
 	}

@@ -1,32 +1,49 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
+import { Foundation } from '@expo/vector-icons';
 
-export default function App() {
-	return (
-		<View style={styles.container}>
-			<View style={styles.topContainer}>
+export default class SelectRole extends React.Component {
+	render() {
+		return (
+			<View style={styles.container}>
 				<View style={styles.titleContainer}>
 					<Text style={styles.title}>처음 오셨네요!</Text>
 					<Text style={styles.title}>원하시는 것을 선택하세요.</Text>
 				</View>
 				<View style={styles.itemContainer}>
 					<View style={styles.leftItem}>
-						<Image
-							style={{ height: '80%', width: '80%' }}
-							source={require('../public/images/apply.png')}
-						/>
+						<TouchableOpacity
+							onPress={() => {
+								alert('근로자');
+							}}
+						>
+							<FontAwesome
+								name="pencil-square-o"
+								size="80"
+								color="orange"
+							></FontAwesome>
+							{/* <Text style={styles.itemText}>근로자</Text> */}
+						</TouchableOpacity>
 					</View>
 					<View style={styles.rightItem}>
-						<Image
-							style={{ height: '80%', width: '80%' }}
-							source={require('../public/images/recruit.png')}
-						/>
+						<TouchableOpacity
+							onPress={() => {
+								alert('사업주');
+							}}
+						>
+							<Foundation
+								name="page-search"
+								size="80"
+								color="orange"
+							></Foundation>
+							{/* <Text style={styles.itemText}>사업주</Text> */}
+						</TouchableOpacity>
 					</View>
 				</View>
 			</View>
-			<View style={styles.bottomContainer}></View>
-		</View>
-	);
+		);
+	}
 }
 
 const styles = StyleSheet.create({
@@ -36,46 +53,62 @@ const styles = StyleSheet.create({
 		marginTop: 50,
 		marginHorizontal: 10,
 	},
-	topContainer: {
-		flex: 1,
-		justifyContent: 'center',
-		// borderWidth: 1,
-		// borderColor: '#000000',
-	},
-	bottomContainer: {
-		flex: 1,
-		backgroundColor: '#ffffff',
-		// borderWidth: 1,
-		// borderColor: '#000000',
-	},
 	title: {
 		fontSize: 20,
 	},
 	titleContainer: {
-		flex: 2,
-		paddingLeft: 10,
+		flex: 1,
+		paddingLeft: 30,
 		marginTop: 40,
 		// borderWidth: 1,
 		// borderColor: '#000000',
-	},
-	leftItem: {
-		flex: 1,
-		marginRight: 5,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	rightItem: {
-		flex: 1,
-		marginLeft: 5,
-		alignItems: 'center',
 		justifyContent: 'center',
 	},
 	itemContainer: {
 		flex: 3,
 		flexDirection: 'row',
-		paddingVertical: 10,
-		paddingHorizontal: 10,
+		// paddingVertical: 10,
+		// paddingHorizontal: 10,
+		// borderWidth: 1,
+		// borderColor: '#000000',
+		alignItems: 'center',
+		justifyContent: 'center',
+		marginBottom: 100,
+	},
+	itemText: {
+		fontSize: 15,
+		alignItems: 'center',
+	},
+	leftItem: {
+		flex: 1,
+		// marginRight: 5,
+		paddingLeft: 15,
+		alignItems: 'center',
+		justifyContent: 'center',
+		alignContent: 'center',
 		// borderWidth: 1,
 		// borderColor: '#000000',
 	},
+	rightItem: {
+		flex: 1,
+		// marginLeft: 5,
+		paddingRight: 15,
+		alignItems: 'center',
+		justifyContent: 'center',
+		alignContent: 'center',
+		// borderWidth: 1,
+		// borderColor: '#000000',
+	},
+	// topContainer: {
+	// 	flex: 1,
+	// 	justifyContent: 'center',
+	// 	borderWidth: 1,
+	// 	borderColor: '#000000',
+	// },
+	// bottomContainer: {
+	// 	flex: 1,
+	// 	backgroundColor: '#ffffff',
+	// 	borderWidth: 1,
+	// 	borderColor: '#000000',
+	// },
 });

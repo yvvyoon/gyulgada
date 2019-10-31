@@ -8,51 +8,53 @@ import {
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-export default function GoToWork({ logTimestamp }) {
-	const timestamp = new Date().toLocaleString();
+export default class GoToWork extends React.Component {
+	render() {
+		const timestamp = new Date().toLocaleString();
 
-	return (
-		<ScrollView alwaysBounceVertical="true">
-			<View style={styles.container}>
-				<View style={styles.titleContainer}>
-					<Text style={styles.titleText}>출 근</Text>
+		return (
+			<ScrollView alwaysBounceVertical="true">
+				<View style={styles.container}>
+					<View style={styles.titleContainer}>
+						<Text style={styles.titleText}>출 근</Text>
+					</View>
+					<View style={styles.subtitleContainer}>
+						<Text style={styles.nameText}>윤영욱</Text>
+						<Text style={styles.subtitleText}>
+							오늘도 다치지 말자구요!
+						</Text>
+					</View>
+					<View style={styles.btnContainer}>
+						<TouchableOpacity onPress={() => alert(timestamp)}>
+							<MaterialIcons
+								name="work"
+								size="100"
+								color="orange"
+								style={styles.btn}
+							></MaterialIcons>
+						</TouchableOpacity>
+					</View>
+					<View style={{ marginTop: 30 }}>
+						<Text style={styles.logText}>
+							☑️{'\t'}2019년 10월 30일 20:45:03
+						</Text>
+						<Text style={styles.logText}>
+							☑️{'\t'}2019년 10월 30일 20:45:03
+						</Text>
+						<Text style={styles.logText}>
+							☑️{'\t'}2019년 10월 30일 20:45:03
+						</Text>
+						<Text style={styles.logText}>
+							☑️{'\t'}2019년 10월 30일 20:45:03
+						</Text>
+						<Text style={styles.logText}>
+							☑️{'\t'}2019년 10월 30일 20:45:03
+						</Text>
+					</View>
 				</View>
-				<View style={styles.subtitleContainer}>
-					<Text style={styles.nameText}>윤영욱</Text>
-					<Text style={styles.subtitleText}>
-						오늘도 다치지 말자구요!
-					</Text>
-				</View>
-				<View style={styles.btnContainer}>
-					<TouchableOpacity onPress={() => alert(timestamp)}>
-						<MaterialIcons
-							name="work"
-							size="100"
-							color="orange"
-							style={styles.btn}
-						></MaterialIcons>
-					</TouchableOpacity>
-				</View>
-				<View style={{ marginTop: 30 }}>
-					<Text style={styles.logText}>
-						☑️{'\t'}2019년 10월 30일 20:45:03
-					</Text>
-					<Text style={styles.logText}>
-						☑️{'\t'}2019년 10월 30일 20:45:03
-					</Text>
-					<Text style={styles.logText}>
-						☑️{'\t'}2019년 10월 30일 20:45:03
-					</Text>
-					<Text style={styles.logText}>
-						☑️{'\t'}2019년 10월 30일 20:45:03
-					</Text>
-					<Text style={styles.logText}>
-						☑️{'\t'}2019년 10월 30일 20:45:03
-					</Text>
-				</View>
-			</View>
-		</ScrollView>
-	);
+			</ScrollView>
+		);
+	}
 }
 
 const styles = StyleSheet.create({
