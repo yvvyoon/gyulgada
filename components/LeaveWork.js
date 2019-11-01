@@ -9,6 +9,19 @@ import {
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default class GoToWork extends React.Component {
+	state = {
+		timestamp: [],
+	};
+
+	handleAddLog = () => {
+		this.setState({
+			// [a, ...b]
+			// 기존에 배열 b에 들어있는 데이터를 뒤로 밀고
+			// 새로 들어온 데이터를 앞으로 입력
+			timestamp: [new Date().toLocaleString(), ...this.state.timestamp],
+		});
+	};
+
 	render() {
 		return (
 			<ScrollView alwaysBounceVertical={true}>
@@ -23,7 +36,7 @@ export default class GoToWork extends React.Component {
 						</Text>
 					</View>
 					<View style={styles.btnContainer}>
-						<TouchableOpacity onPress={() => alert(props.currTime)}>
+						<TouchableOpacity onPress={this.handleAddLog}>
 							<MaterialCommunityIcons
 								name="exit-run"
 								size="100"
@@ -33,21 +46,9 @@ export default class GoToWork extends React.Component {
 						</TouchableOpacity>
 					</View>
 					<View style={{ marginTop: 30 }}>
-						<Text style={styles.logText}>
-							2019년 10월 30일 20:45:03
-						</Text>
-						<Text style={styles.logText}>
-							2019년 10월 30일 20:45:03
-						</Text>
-						<Text style={styles.logText}>
-							2019년 10월 30일 20:45:03
-						</Text>
-						<Text style={styles.logText}>
-							2019년 10월 30일 20:45:03
-						</Text>
-						<Text style={styles.logText}>
-							2019년 10월 30일 20:45:03
-						</Text>
+						{this.state.timestamp.map(res => {
+							return <Text style={styles.logText}>{res}</Text>;
+						})}
 					</View>
 				</View>
 			</ScrollView>

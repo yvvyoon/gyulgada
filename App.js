@@ -1,11 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
+
 import SelectRole from './components/SelectRole';
 import TypePhone from './components/TypePhone';
 import MyPage from './components/MyPage';
 import GoToWork from './components/GoToWork';
 import LeaveWork from './components/LeaveWork';
 import Contract from './components/Contract';
+import WorkHistory from './components/WorkHistory';
 
 export default class App extends React.Component {
 	state = {
@@ -22,12 +24,13 @@ export default class App extends React.Component {
 		return (
 			<View style={styles.container}>
 				{/* <TypePhone></TypePhone> */}
-				<SelectRole></SelectRole>
+				{/* <SelectRole></SelectRole> */}
 				{/* <MyPage></MyPage> */}
 				{/* <Sidebar></Sidebar> */}
-				{/* <GoToWork logTimestamp={this.logTimestamp}></GoToWork> */}
-				{/* <LeaveWork></LeaveWork> */}
+				{/* <GoToWork></GoToWork> */}
+				<LeaveWork></LeaveWork>
 				{/* <Contract></Contract> */}
+				{/* <WorkHistory></WorkHistory> */}
 			</View>
 		);
 	}
