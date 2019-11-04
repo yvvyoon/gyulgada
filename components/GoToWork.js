@@ -9,7 +9,8 @@ import {
 
 export default class GoToWork extends React.Component {
 	state = {
-		timestamp: [],
+		date: [],
+		// flag: true,
 	};
 
 	handleAddLog = () => {
@@ -17,7 +18,11 @@ export default class GoToWork extends React.Component {
 			// [a, ...b]
 			// 기존에 배열 b에 들어있는 데이터를 뒤로 밀고
 			// 새로 들어온 데이터를 앞으로 입력
-			timestamp: [new Date().toLocaleString(), ...this.state.timestamp],
+			date: [
+				new Date().toLocaleTimeString(),
+				new Date().toLocaleDateString(),
+				...this.state.date,
+			],
 		});
 	};
 
@@ -59,8 +64,12 @@ export default class GoToWork extends React.Component {
 				</View>
 				<ScrollView alwaysBounceVertical="true">
 					<View style={styles.bottomContainer}>
-						{this.state.timestamp.map(res => {
-							return <Text style={styles.logText}>{res}</Text>;
+						{this.state.date.map(res => {
+							return (
+								<View style={styles.logContainer}>
+									<Text style={styles.logText}>{res}</Text>
+								</View>
+							);
 						})}
 					</View>
 				</ScrollView>
@@ -83,6 +92,12 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 30,
 		minHeight: '50%',
 		maxHeight: '50%',
+	},
+	bottomContainer: {
+		flex: 1,
+		// flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 	navContainer: {
 		flex: 1,
@@ -156,10 +171,20 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
+	logIconContainer: {
+		flex: 1,
+		borderColor: '#000000',
+		borderWidth: 1,
+	},
+	logContainer: {
+		flex: 2,
+		// paddingTop: 20,
+		// borderColor: '#000000',
+		// borderWidth: 1,
+	},
 	logText: {
 		fontSize: 20,
-		marginTop: 10,
-		marginBottom: 10,
-		marginLeft: 10,
+		paddingVertical: 20,
+		// marginLeft: 10,
 	},
 });
