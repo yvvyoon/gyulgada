@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { version } from 'react';
 import {
 	StyleSheet,
 	Text,
 	View,
 	ScrollView,
 	TouchableOpacity,
-	FlatList,
 } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
 
 export default class GoToWork extends React.Component {
 	state = {
@@ -25,34 +23,48 @@ export default class GoToWork extends React.Component {
 
 	render() {
 		return (
-			<ScrollView alwaysBounceVertical="true">
-				<View style={styles.container}>
+			<View style={styles.container}>
+				<View style={styles.topContainer}>
+					<View style={styles.navContainer}></View>
 					<View style={styles.titleContainer}>
-						<Text style={styles.titleText}>출 근</Text>
-					</View>
-					<View style={styles.subtitleContainer}>
-						<Text style={styles.nameText}>윤영욱</Text>
-						<Text style={styles.subtitleText}>
-							오늘도 다치지 말자구요!
+						<Text style={styles.titleText}>사장님</Text>
+						<Text style={styles.titleText}>
+							오늘의 업무 내용입니다.
 						</Text>
 					</View>
-					<View style={styles.btnContainer}>
+					<View style={styles.buttonContainer}>
 						<TouchableOpacity onPress={this.handleAddLog}>
-							<MaterialIcons
-								name="work"
-								size="100"
-								color="orange"
-								style={styles.btn}
-							></MaterialIcons>
+							<View style={styles.buttonView}>
+								<Text
+									style={{ color: '#FFA904', fontSize: 20 }}
+								>
+									출근 버튼
+								</Text>
+							</View>
 						</TouchableOpacity>
 					</View>
-					<View style={{ marginTop: 30 }}>
+					<View style={styles.stateContainer}>
+						<View style={styles.leftContainer}></View>
+						<View style={styles.midContainer}>
+							<Text style={styles.stateTitleText}>
+								업무 진행 상황
+							</Text>
+							<Text style={styles.stateContentText}>90%</Text>
+						</View>
+						<View style={styles.rightContainer}>
+							<Text style={styles.stateTitleText}>정산 내역</Text>
+							<Text style={styles.stateContentText}>9,000</Text>
+						</View>
+					</View>
+				</View>
+				<ScrollView alwaysBounceVertical="true">
+					<View style={styles.bottomContainer}>
 						{this.state.timestamp.map(res => {
 							return <Text style={styles.logText}>{res}</Text>;
 						})}
 					</View>
-				</View>
-			</ScrollView>
+				</ScrollView>
+			</View>
 		);
 	}
 }
@@ -61,55 +73,88 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center',
-		marginTop: 50,
-		marginBottom: 50,
-		marginHorizontal: 20,
-		// borderColor: '#000000',
+	},
+	topContainer: {
+		flex: 1,
+		backgroundColor: '#000000',
+		justifyContent: 'center',
+		color: '#ffffff',
+		paddingTop: 50,
+		paddingHorizontal: 30,
+		minHeight: '50%',
+		maxHeight: '50%',
+	},
+	navContainer: {
+		flex: 1,
+		// borderColor: '#ffffff',
 		// borderWidth: 1,
 	},
 	titleContainer: {
+		flex: 2,
+		// borderColor: '#ffffff',
+		// borderWidth: 1,
+		justifyContent: 'center',
+	},
+	buttonContainer: {
 		flex: 1,
-		alignItems: 'center',
-		// borderColor: '#000000',
+		// borderColor: '#ffffff',
+		// borderWidth: 1,
+		justifyContent: 'center',
+	},
+	stateContainer: {
+		flex: 2,
+		flexDirection: 'row',
+		justifyContent: 'center',
+		// borderColor: '#ffffff',
 		// borderWidth: 1,
 	},
 	titleText: {
-		fontSize: 40,
+		color: '#ffffff',
+		fontSize: 30,
+	},
+	button: {
+		fontSize: 20,
 		fontWeight: 'bold',
-		marginLeft: 10,
+		color: '#FFA904',
+	},
+	leftContainer: {
+		flex: 1,
+		// borderColor: '#ffffff',
+		// borderWidth: 1,
+	},
+	midContainer: {
+		flex: 1,
+		// borderColor: '#ffffff',
+		// borderWidth: 1,
+		alignItems: 'center',
 		justifyContent: 'center',
 	},
-	subtitleContainer: {
+	rightContainer: {
 		flex: 1,
-		justifyContent: 'flex-start',
-		// borderColor: '#000000',
+		// borderColor: '#ffffff',
 		// borderWidth: 1,
-		marginTop: 30,
-	},
-	nameText: {
-		fontSize: 30,
-		marginLeft: 10,
-	},
-	subtitleText: {
-		fontSize: 25,
-		color: '#808080',
-		marginTop: 10,
-		marginLeft: 10,
-	},
-	btnContainer: {
-		flex: 3,
 		alignItems: 'center',
-		justifyContent: 'flex-start',
-		// borderColor: '#000000',
-		// borderWidth: 1,
-		marginTop: 30,
+		justifyContent: 'center',
 	},
-	btn: {
-		borderRadius: 8,
-	},
-	btnText: {
-		fontSize: 35,
+	stateTitleText: {
 		color: '#ffffff',
+		fontWeight: 'bold',
+		fontSize: 17,
+	},
+	stateContentText: {
+		color: '#ffffff',
+		fontWeight: 'bold',
+		fontSize: 25,
+		paddingTop: 15,
+	},
+	buttonView: {
+		borderWidth: 1,
+		borderRadius: 30,
+		borderColor: '#FFA904',
+		width: '40%',
+		height: '77%',
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 	logText: {
 		fontSize: 20,

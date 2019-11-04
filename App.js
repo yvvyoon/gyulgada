@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { createSwitchNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import SelectRole from './components/SelectRole';
 import TypePhone from './components/TypePhone';
@@ -7,30 +9,17 @@ import MyPage from './components/MyPage';
 import GoToWork from './components/GoToWork';
 import LeaveWork from './components/LeaveWork';
 import Contract from './components/Contract';
-import WorkHistory from './components/WorkHistory';
 
 export default class App extends React.Component {
-	state = {
-		timestamp: [],
-	};
-
-	logTimestamp = () => {
-		const currTime = new Date().toLocaleTimeString();
-
-		this.setState({ timestamp: currTime });
-	};
-
 	render() {
 		return (
 			<View style={styles.container}>
-				{/* <TypePhone></TypePhone> */}
 				{/* <SelectRole></SelectRole> */}
+				{/* <TypePhone></TypePhone> */}
 				{/* <MyPage></MyPage> */}
-				{/* <Sidebar></Sidebar> */}
-				{/* <GoToWork></GoToWork> */}
-				<LeaveWork></LeaveWork>
+				<GoToWork></GoToWork>
+				{/* <LeaveWork></LeaveWork> */}
 				{/* <Contract></Contract> */}
-				{/* <WorkHistory></WorkHistory> */}
 			</View>
 		);
 	}

@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import Sidebar from './Sidebar';
 
 export default class MyPage extends React.Component {
 	render() {

@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
 	btnText: {
 		fontSize: 30,
 		fontWeight: 'bold',
-		color: '#000000',
+		color: '#ffffff',
 		paddingVertical: 10,
 	},
 });
