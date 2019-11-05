@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-export default class GoToWork extends React.Component {
+export default class LeaveWork extends React.Component {
 	state = {
 		timestamp: [],
 	};
