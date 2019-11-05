@@ -9,7 +9,12 @@ import {
 
 export default class GoToWork extends React.Component {
 	state = {
-		date: [],
+		timestamp: [
+			{
+				date: '',
+				time: '',
+			},
+		],
 		// flag: true,
 	};
 
@@ -18,10 +23,12 @@ export default class GoToWork extends React.Component {
 			// [a, ...b]
 			// 기존에 배열 b에 들어있는 데이터를 뒤로 밀고
 			// 새로 들어온 데이터를 앞으로 입력
-			date: [
-				new Date().toLocaleTimeString(),
-				new Date().toLocaleDateString(),
-				...this.state.date,
+			timestamp: [
+				{
+					date: new Date().toLocaleDateString(),
+					time: new Date().toLocaleTimeString(),
+				},
+				...this.state.timestamp,
 			],
 		});
 	};
@@ -64,10 +71,15 @@ export default class GoToWork extends React.Component {
 				</View>
 				<ScrollView alwaysBounceVertical="true">
 					<View style={styles.bottomContainer}>
-						{this.state.date.map(res => {
+						{this.state.timestamp.map(res => {
 							return (
 								<View style={styles.logContainer}>
-									<Text style={styles.logText}>{res}</Text>
+									<Text style={styles.logText}>
+										{res.time}
+									</Text>
+									<Text style={styles.logText}>
+										{res.date}
+									</Text>
 								</View>
 							);
 						})}
@@ -178,13 +190,13 @@ const styles = StyleSheet.create({
 	},
 	logContainer: {
 		flex: 2,
-		// paddingTop: 20,
+		paddingTop: 20,
 		// borderColor: '#000000',
 		// borderWidth: 1,
 	},
 	logText: {
 		fontSize: 20,
-		paddingVertical: 20,
+		// paddingVertical: 20,
 		// marginLeft: 10,
 	},
 });

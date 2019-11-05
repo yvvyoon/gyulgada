@@ -6,24 +6,31 @@ import {
 	ScrollView,
 	TouchableOpacity,
 } from 'react-native';
-import { SearchBar } from 'react-native-elements';
+import { Searchbar } from 'react-native-paper';
 
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
 export default class MyPage extends React.Component {
+	state = {
+		firstQuery: '',
+	};
 	render() {
+		const { firstQuery } = this.state;
+
 		return (
 			<View style={styles.container}>
 				<View style={styles.titleContainer}>
-					<Text style={styles.titleText}>마이 페이지</Text>
+					<Text style={styles.titleText}>마이페이지</Text>
 				</View>
 				{/* <View style={styles.searchContainer}> */}
-				<SearchBar
+				<Searchbar
 					placeholder="사업장명을 검색하세요."
-					lightTheme="true"
-					round="true"
-				></SearchBar>
+					onChangeText={query => {
+						this.setState({ firstQuery: query });
+					}}
+					value={firstQuery}
+				/>
 				{/* </View> */}
 				<ScrollView
 					horizontal="true"
@@ -220,6 +227,7 @@ const styles = StyleSheet.create({
 		// borderColor: '#000000',
 		// borderWidth: 1,
 		minHeight: '10%',
+		// paddingTop: 50,
 	},
 	searchContainer: {
 		flex: 1,
@@ -290,34 +298,55 @@ const styles = StyleSheet.create({
 	itemButton: {
 		flex: 1,
 		flexDirection: 'row',
-		borderColor: '#d3d3d3',
+		borderColor: '#ffffff',
 		borderWidth: 0.5,
 		marginBottom: 10,
 		borderRadius: 20,
 		minHeight: 70,
+		maxWidth: '98%',
 		alignItems: 'center',
 		elevation: 1,
 		shadowColor: '#d3d3d3',
-		shadowOffset: { width: 0, height: 2 },
-		shadowOpacity: 0.5,
+		shadowOffset: { width: 2, height: 2 },
+		shadowOpacity: 1,
 		shadowRadius: 2,
 	},
 	itemLeft: {
 		flex: 1,
 		alignItems: 'center',
+		// shadowColor: '#ffffff',
+		shadowOffset: { width: 0, height: 0 },
+		shadowOpacity: 0,
+		shadowRadius: 0,
 	},
 	itemMid: {
 		flex: 3,
+		// shadowColor: '#ffffff',
+		shadowOffset: { width: 0, height: 0 },
+		shadowOpacity: 0,
+		shadowRadius: 0,
 	},
 	itemRight: {
 		flex: 1,
 		alignItems: 'center',
+		// shadowColor: '#ffffff',
+		shadowOffset: { width: 0, height: 0 },
+		shadowOpacity: 0,
+		shadowRadius: 0,
 	},
 	itemName: {
 		fontWeight: 'bold',
 		paddingBottom: 5,
+		// shadowColor: '#ffffff',
+		shadowOffset: { width: 0, height: 0 },
+		shadowOpacity: 0,
+		shadowRadius: 0,
 	},
 	itemPeriod: {
 		color: '#808080',
+		// shadowColor: '#ffffff',
+		shadowOffset: { width: 0, height: 0 },
+		shadowOpacity: 0,
+		shadowRadius: 0,
 	},
 });
