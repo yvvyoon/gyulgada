@@ -5,15 +5,11 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
-import SelectRole from './components/SelectRole';
-import TypePhone from './components/TypePhone';
-
 import LeaveWork from './components/WORK/LeaveWork';
 import GoToWork from './components/WORK/GoToWork';
 import MyPage from './components/MYPAGE/MyPage';
 import Schedule from './components/SCHEDULE/Schedule';
-
-import Contract from './components/Contract';
+import Setting from './components/SETTING/Setting';
 
 const BottomTabNavigator = createBottomTabNavigator({
 	출퇴근: {
@@ -76,7 +72,7 @@ const BottomTabNavigator = createBottomTabNavigator({
 		},
 	},
 	설정: {
-		screen: Contract,
+		screen: Setting,
 		navigationOptions: {
 			// tabBarIcon: ({ tintColor }) => {
 			// 	const iconName = `ios-git-merge`;
