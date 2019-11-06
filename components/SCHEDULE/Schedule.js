@@ -112,14 +112,12 @@ export default class Schedule extends React.Component {
 					</View>
 					<ScrollView alwaysBounceVertical>
 						{this.state.list.map(res => {
-							return (
-								<View style={styles.listContentContainer}>
-									<Text style={styles.name}>{res.name}</Text>
-									<Text style={styles.address}>
-										{res.address}
-									</Text>
-								</View>
-							);
+							<View style={styles.listContentContainer}>
+								<Text style={styles.name}>{res.name}</Text>
+								<Text style={styles.address}>
+									{res.address}
+								</Text>
+							</View>;
 						})}
 					</ScrollView>
 				</View>

@@ -10,6 +10,8 @@ import {
 	TouchableOpacity,
 } from 'react-native';
 
+import Index from './Index';
+
 // 아무 곳이나 터치하면 키보드 숨기는 기능
 const DismissKeyboard = ({ children }) => (
 	<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -17,35 +19,54 @@ const DismissKeyboard = ({ children }) => (
 	</TouchableWithoutFeedback>
 );
 
-export default TypePhone = ({ toIndex, toSelectRole }) => {
-	return (
-		<DismissKeyboard>
-			<View style={styles.container}>
-				{/* 키보드를 띄우면 방해되지 않도록 하면을 올리는 View */}
-				<KeyboardAvoidingView behavior="position">
-					<View style={styles.halfContainer}>
-						<Text style={styles.title}>
-							휴대폰 번호를 입력해주세요.
-						</Text>
-						<TextInput
-							style={styles.textInput}
-							keyboardType="number-pad"
-							placeholder="하이픈(-) 없이 입력해주세요."
-						></TextInput>
-						{/* <View */}
-						<TouchableOpacity
-							style={styles.submitButton}
-							onPress={toIndex}
-						>
-							<Text style={styles.submitText}>다 음</Text>
-						</TouchableOpacity>
-						{/* </View> */}
-					</View>
-				</KeyboardAvoidingView>
-			</View>
-		</DismissKeyboard>
-	);
-};
+export default class App extends React.Component {
+	state = {};
+
+	static navigationOptions = {
+		title: '로그인해주세요.',
+	};
+
+	_signInAsync = async () => {
+		await AsyncStorage.setItem('userToken', 'abc');
+
+		this.props.navigation.navigate('Index');
+	};
+
+	render() {
+		return (
+			<DismissKeyboard>
+				<View style={styles.container}>
+					{/* 키보드를 띄우면 방해되지 않도록 하면을 올리는 View */}
+					<KeyboardAvoidingView behavior="position">
+						<View style={styles.halfContainer}>
+							<Text style={styles.title}>
+								휴대폰 번호를 입력해주세요.
+							</Text>
+							<TextInput
+								style={styles.textInput}
+								keyboardType="number-pad"
+								placeholder="하이픈(-) 없이 입력해주세요."
+							></TextInput>
+							<TouchableOpacity
+								style={styles.submitButton}
+								// onPress={toIndex}
+							>
+								<Text
+									style={styles.submitText}
+									onPress={() => {
+										<Index />;
+									}}
+								>
+									다 음
+								</Text>
+							</TouchableOpacity>
+						</View>
+					</KeyboardAvoidingView>
+				</View>
+			</DismissKeyboard>
+		);
+	}
+}
 
 const styles = StyleSheet.create({
 	container: {

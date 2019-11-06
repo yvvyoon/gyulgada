@@ -5,6 +5,7 @@ import {
 	View,
 	ScrollView,
 	TouchableOpacity,
+	AsyncStorage,
 } from 'react-native';
 
 export default class GoToWork extends React.Component {
@@ -31,6 +32,9 @@ export default class GoToWork extends React.Component {
 				...this.state.timestamp,
 			],
 		});
+	};
+	logOut = async () => {
+		await AsyncStorage.clear();
 	};
 
 	render() {
@@ -71,18 +75,12 @@ export default class GoToWork extends React.Component {
 				</View>
 				<ScrollView alwaysBounceVertical="true">
 					<View style={styles.bottomContainer}>
-						{this.state.timestamp.map(res => {
-							return (
-								<View style={styles.logContainer}>
-									<Text style={styles.logText}>
-										{res.time}
-									</Text>
-									<Text style={styles.logText}>
-										{res.date}
-									</Text>
-								</View>
-							);
-						})}
+						{this.state.timestamp.map(res => (
+							<View style={styles.logContainer}>
+								<Text style={styles.logText}>{res.time}</Text>
+								<Text style={styles.logText}>{res.date}</Text>
+							</View>
+						))}
 					</View>
 				</ScrollView>
 			</View>

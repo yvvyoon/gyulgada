@@ -1,14 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 
-import TypePhone from './components/TypePhone';
+import TypePhone from './TypePhone';
 import SelectRole from './components/SelectRole';
 import Index from './Index';
+import Axios from 'axios';
 
 export default class App extends React.Component {
 	state = {
 		isLoggedIn: false,
 		isSignedUp: false,
+		id: '',
+		pw: '',
 	};
 
 	toIndex = () => {
@@ -23,18 +26,37 @@ export default class App extends React.Component {
 		});
 	};
 
-	componentDidMount() {
-		return <TypePhone />;
-	}
+	login = () => {
+		this.setState({
+			isLoggedIn: true,
+		});
+	};
+
+	logout = async () => {
+		/* 		this.setState({
+			isLoggedIn: false,
+		}); */
+		await AsyncStorage.clear();
+	};
+
+	static navigationOptions = {
+		title: '로그인해주세요.',
+	};
+
+	_signInAsync = async () => {
+		await AsyncStorage.setItem('userToken', 'abc');
+
+		this.props.navigation.navigate('Index');
+	};
+
+	componentDidMount = async () => {
+		await AsyncStorage.clear();
+	};
 
 	render() {
 		return (
 			<View style={styles.container}>
-				{/* <TypePhone
-					toIndex={this.toIndex}
-					toSelectRole={this.toSelectRole}
-				/> */}
-				{!this.state.idLoggedIn ? <Index /> : <TypePhone />}
+				{AsyncStorage.getItem('pnum') ? <Index /> : <TypePhone />}
 			</View>
 		);
 	}

@@ -1,7 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import {
+	StyleSheet,
+	Text,
+	View,
+	TouchableOpacity,
+	AsyncStorage,
+} from 'react-native';
 
 export default Setting = () => {
+	logout = async () => {
+		await AsyncStorage.clear();
+
+		alert('ㅅㅂ');
+
+		/* this.props.navigation.navigate('Main'); */
+	};
+
 	return (
 		<View style={styles.container}>
 			<TouchableOpacity
@@ -20,12 +34,7 @@ export default Setting = () => {
 			>
 				<Text style={styles.buttonText}>위치 설정</Text>
 			</TouchableOpacity>
-			<TouchableOpacity
-				style={styles.button}
-				onPress={() => {
-					alert('로그아웃');
-				}}
-			>
+			<TouchableOpacity style={styles.button} onPress={this.logout}>
 				<Text style={styles.buttonText}>로그아웃</Text>
 			</TouchableOpacity>
 		</View>
