@@ -8,6 +8,8 @@ import {
 	AsyncStorage,
 } from 'react-native';
 
+import axios from 'axios';
+
 export default class GoToWork extends React.Component {
 	state = {
 		timestamp: [
@@ -16,7 +18,9 @@ export default class GoToWork extends React.Component {
 				time: '',
 			},
 		],
-		// flag: true,
+		go: '',
+		leave: '',
+		timelog: '',
 	};
 
 	handleAddLog = () => {
@@ -33,8 +37,65 @@ export default class GoToWork extends React.Component {
 			],
 		});
 	};
+
 	logOut = async () => {
-		await AsyncStorage.clear();
+		try {
+			await AsyncStorage.clear();
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	Timelog = async () => {
+		alert('ㅅㅂㅅㅂ');
+
+		const {
+			data: { result },
+			// } = await axios.post('http://70.12.225.80:4000/timelog', {
+		} = await axios.post('http://localhost:4000/timelog', {
+			params: {
+				pnum: '01054884480',
+				name: '윤영욱',
+				go: this.state.go,
+				leave: this.state.leave,
+				timelog: this.state.timelog,
+			},
+		});
+
+		this.setState({
+			timestamp: [timelog, ...this.state.timelog],
+		});
+
+		console.log(result);
+
+		return alert(result);
+	};
+
+	gobuttonChange = async () => {
+		this.setState({
+			go: 1,
+			leave: '',
+			timelog: Date(),
+		});
+
+		await console.log('go', this.state.go);
+		await console.log('leave', this.state.leave);
+		await console.log('timelog : ', this.state.timelog);
+
+		await this.Timelog();
+	};
+
+	leavebuttonChange = async () => {
+		await this.setState({
+			go: '',
+			leave: 1,
+			timelog: Date(),
+		});
+		await console.log('go', this.state.go);
+		await console.log('leave', this.state.leave);
+		await console.log('timelog', this.state.timelog);
+
+		await this.Timelog();
 	};
 
 	render() {
@@ -48,17 +109,37 @@ export default class GoToWork extends React.Component {
 							오늘의 업무 내용입니다.
 						</Text>
 					</View>
-					<View style={styles.buttonContainer}>
-						<TouchableOpacity onPress={this.handleAddLog}>
-							<View style={styles.buttonView}>
-								<Text
-									style={{ color: '#FFA904', fontSize: 20 }}
-								>
-									출근 버튼
-								</Text>
-							</View>
-						</TouchableOpacity>
-					</View>
+					{this.state.go === 1 ? (
+						<View style={styles.buttonContainer}>
+							<TouchableOpacity onPress={this.leavebuttonChange}>
+								<View style={styles.buttonView}>
+									<Text
+										style={{
+											color: '#FFA904',
+											fontSize: 20,
+										}}
+									>
+										출근 버튼
+									</Text>
+								</View>
+							</TouchableOpacity>
+						</View>
+					) : this.state.leave === 1 ? (
+						<View style={styles.buttonContainer}>
+							<TouchableOpacity onPress={this.gobuttonChange}>
+								<View style={styles.buttonView}>
+									<Text
+										style={{
+											color: '#FFA904',
+											fontSize: 20,
+										}}
+									>
+										퇴근 버튼
+									</Text>
+								</View>
+							</TouchableOpacity>
+						</View>
+					)}
 					<View style={styles.stateContainer}>
 						<View style={styles.leftContainer}></View>
 						<View style={styles.midContainer}>
@@ -75,12 +156,11 @@ export default class GoToWork extends React.Component {
 				</View>
 				<ScrollView alwaysBounceVertical="true">
 					<View style={styles.bottomContainer}>
-						{this.state.timestamp.map(res => (
-							<View style={styles.logContainer}>
-								<Text style={styles.logText}>{res.time}</Text>
-								<Text style={styles.logText}>{res.date}</Text>
-							</View>
-						))}
+						<View style={styles.logContainer}>
+							<Text style={styles.logText}>
+								{this.state.timelog}
+							</Text>
+						</View>
 					</View>
 				</ScrollView>
 			</View>

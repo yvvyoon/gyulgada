@@ -49,8 +49,10 @@ export default class App extends React.Component {
 		this.props.navigation.navigate('Index');
 	};
 
-	componentDidMount = async () => {
-		await AsyncStorage.clear();
+	componentDidMount = () => {
+		// await AsyncStorage.clear();
+		// AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove);
+		// const a = await AsyncStorage.getItem('pnum')
 	};
 
 	render() {
