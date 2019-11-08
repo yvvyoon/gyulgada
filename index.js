@@ -29,8 +29,8 @@ import Main from './components/WORK/Main';
 
 const BottomTabNavigator = createBottomTabNavigator({
 	출퇴근: {
-		screen: GoToWork,
-		// screen: Schedule,
+		// screen: GoToWork,
+		screen: Schedule,
 		navigationOptions: {
 			tabBarOptions: {
 				activeTintColor: '#FFA904',

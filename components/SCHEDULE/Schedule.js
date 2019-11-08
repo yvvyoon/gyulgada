@@ -12,25 +12,50 @@ export default class Schedule extends React.Component {
 			workCount: 2,
 			list: [
 				{
-					name: '제주 귤 농장',
-					address: '제주 서귀포시... 주소',
+					name: '영찬이네 감귤',
+					address: '제주 서귀포시 문성로38길 32-10',
+					startDate: `${new Date().getMonth()}월 ${new Date().getDay()}일 ${new Date().getHours()}시 ${new Date().getMinutes()}분`,
+					endDate: `${new Date().getMonth()}월 ${new Date().getDay() +
+						3}일 ${new Date().getHours()}시 ${new Date().getMinutes()}분`,
 				},
 				{
-					name: '제주 한라봉 따기',
-					address: '제주 서귀포시... 주소',
+					name: '천혜향땄도림',
+					address: '제주 서귀포시 염솔로 131',
+					startDate: `${new Date().getMonth() +
+						1}월 ${new Date().getDay()}일 ${new Date().getHours()}시 ${new Date().getMinutes()}분`,
+					endDate: `${new Date().getMonth() +
+						1}월 ${new Date().getDay() +
+						3}일 ${new Date().getHours()}시 ${new Date().getMinutes()}분`,
 				},
 				{
-					name: '우도 가기',
-					address: '제주 서귀포시... 주소',
+					name: '천혜향땄도림',
+					address: '제주 서귀포시 염솔로 131',
+					startDate: `${new Date().getMonth() +
+						1}월 ${new Date().getDay()}일 ${new Date().getHours()}시 ${new Date().getMinutes()}분`,
+					endDate: `${new Date().getMonth() +
+						1}월 ${new Date().getDay() +
+						3}일 ${new Date().getHours()}시 ${new Date().getMinutes()}분`,
 				},
 				{
-					name: '땅콩 아이스크림',
-					address: '제주 서귀포시... 주소',
+					name: '천혜향땄도림',
+					address: '제주 서귀포시 염솔로 131',
+					startDate: `${new Date().getMonth() +
+						1}월 ${new Date().getDay()}일 ${new Date().getHours()}시 ${new Date().getMinutes()}분`,
+					endDate: `${new Date().getMonth() +
+						1}월 ${new Date().getDay() +
+						3}일 ${new Date().getHours()}시 ${new Date().getMinutes()}분`,
 				},
 			],
 		};
 
 		this.onDateChange = this.onDateChange.bind(this);
+	}
+
+	componentDidMount() {
+		this.setState({
+			selectedStartDate: null,
+			selectedEndDate: null,
+		});
 	}
 
 	onDateChange(date, type) {
@@ -49,10 +74,10 @@ export default class Schedule extends React.Component {
 
 	render() {
 		const { selectedStartDate, selectedEndDate } = this.state;
-		const minDate = new Date(2018, 1, 1); // Min date
-		const maxDate = new Date(2050, 6, 3); // Max date
-		const startDate = selectedStartDate ? selectedStartDate.toString() : ''; //Start date
-		const endDate = selectedEndDate ? selectedEndDate.toString() : ''; //End date
+		const minDate = new Date(2018, 1, 1);
+		const maxDate = new Date(2050, 6, 3);
+		const startDate = selectedStartDate ? selectedStartDate.toString() : '';
+		const endDate = selectedEndDate ? selectedEndDate.toString() : '';
 
 		return (
 			<View style={styles.container}>
@@ -108,24 +133,36 @@ export default class Schedule extends React.Component {
 					<View style={styles.listTitleContainer}>
 						<Text style={styles.listTitle}>알바 리스트</Text>
 						<Text style={styles.listSubtitle}>
-							업무 내용 : {this.state.workCount}개
+							업무 내용 : {this.state.list.length}개
 						</Text>
 					</View>
-					<ScrollView alwaysBounceVertical>
+					<ScrollView
+						alwaysBounceVertical="true"
+						showsVerticalScrollIndicator="false"
+					>
 						<View style={styles.listContentContainer}>
-							<Text style={styles.name}>{startDate}</Text>
-							<Text style={styles.name}>{endDate}</Text>
+							{/* <Text style={styles.name}>{startDate}</Text>
+							<Text style={styles.name}>{endDate}</Text> */}
+
+							{this.state.list.map(item => {
+								return (
+									<View style={styles.listContentContainer}>
+										<Text style={styles.name}>
+											{item.name}
+										</Text>
+										<Text style={styles.address}>
+											{item.address}
+										</Text>
+										<Text style={styles.address}>
+											{item.startDate}
+										</Text>
+										<Text style={styles.address}>
+											{item.endDate}
+										</Text>
+									</View>
+								);
+							})}
 						</View>
-						{/* {this.state.list.map(item => {
-							return (
-								<View style={styles.listContentContainer}>
-									<Text style={styles.name}>{item.name}</Text>
-									<Text style={styles.address}>
-										{item.address}
-									</Text>
-								</View>
-							);
-						})} */}
 					</ScrollView>
 				</View>
 			</View>
@@ -156,7 +193,7 @@ const styles = StyleSheet.create({
 		minHeight: '50%',
 	},
 	listContainer: {
-		minHeight: '40%',
+		maxHeight: '40%',
 		paddingHorizontal: 30,
 		paddingTop: 30,
 	},
