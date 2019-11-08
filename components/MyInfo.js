@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
-export default class MyPage extends React.Component {
+export default class MyInfo extends React.Component {
 	render() {
 		return (
 			<ScrollView alwaysBounceVertical="true">

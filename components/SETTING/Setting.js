@@ -9,9 +9,12 @@ import {
 
 export default Setting = () => {
 	logout = async () => {
-		await AsyncStorage.clear();
-
-		alert('ㅅㅂ');
+		try {
+			await AsyncStorage.clear();
+		} catch (err) {
+			console.error(err);
+			alert(err);
+		}
 
 		/* this.props.navigation.navigate('Main'); */
 	};

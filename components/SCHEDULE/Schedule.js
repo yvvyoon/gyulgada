@@ -7,10 +7,9 @@ export default class Schedule extends React.Component {
 		super(props);
 
 		this.state = {
-			//set value in state for start and end date
 			selectedStartDate: null,
 			selectedEndDate: null,
-			workCount: 0,
+			workCount: 2,
 			list: [
 				{
 					name: '제주 귤 농장',
@@ -108,17 +107,25 @@ export default class Schedule extends React.Component {
 				<View style={styles.listContainer}>
 					<View style={styles.listTitleContainer}>
 						<Text style={styles.listTitle}>알바 리스트</Text>
-						<Text style={styles.listSubtitle}>업무 내용 : 3개</Text>
+						<Text style={styles.listSubtitle}>
+							업무 내용 : {this.state.workCount}개
+						</Text>
 					</View>
 					<ScrollView alwaysBounceVertical>
-						{this.state.list.map(res => {
-							<View style={styles.listContentContainer}>
-								<Text style={styles.name}>{res.name}</Text>
-								<Text style={styles.address}>
-									{res.address}
-								</Text>
-							</View>;
-						})}
+						<View style={styles.listContentContainer}>
+							<Text style={styles.name}>{startDate}</Text>
+							<Text style={styles.name}>{endDate}</Text>
+						</View>
+						{/* {this.state.list.map(item => {
+							return (
+								<View style={styles.listContentContainer}>
+									<Text style={styles.name}>{item.name}</Text>
+									<Text style={styles.address}>
+										{item.address}
+									</Text>
+								</View>
+							);
+						})} */}
 					</ScrollView>
 				</View>
 			</View>
@@ -181,6 +188,7 @@ const styles = StyleSheet.create({
 	name: {
 		fontSize: 20,
 		fontWeight: 'bold',
+		color: '#000000',
 	},
 	address: {
 		fontSize: 17,

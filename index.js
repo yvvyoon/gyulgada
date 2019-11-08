@@ -30,6 +30,7 @@ import Main from './components/WORK/Main';
 const BottomTabNavigator = createBottomTabNavigator({
 	출퇴근: {
 		screen: GoToWork,
+		// screen: Schedule,
 		navigationOptions: {
 			tabBarOptions: {
 				activeTintColor: '#FFA904',
@@ -58,7 +59,7 @@ const BottomTabNavigator = createBottomTabNavigator({
 			},
 		},
 	},
-	마이페이지: {
+	내계약서: {
 		screen: MyPage,
 		navigationOptions: {
 			tabBarOptions: {

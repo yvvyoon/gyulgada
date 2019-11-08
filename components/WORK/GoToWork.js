@@ -1,4 +1,4 @@
-import React, { version } from 'react';
+import React from 'react';
 import {
 	StyleSheet,
 	Text,
@@ -7,95 +7,88 @@ import {
 	TouchableOpacity,
 	AsyncStorage,
 } from 'react-native';
-
 import axios from 'axios';
 
 export default class GoToWork extends React.Component {
 	state = {
-		timestamp: [
-			{
-				date: '',
-				time: '',
-			},
-		],
-		go: '',
-		leave: '',
-		timelog: '',
+		pnum: '',
+		name: '윤영욱',
+		// 출근퇴근 여부
+		// 0 : 출근
+		// 1 : 퇴근
+		resultFlag: '1',
+		// toLocaleString()
+		timeLog: '',
+		timeLogList: [],
+		// getTime()
+		milliTime: '',
+		// 업무 진행 상황(%)
+		workStatus: 85,
+		// 정산 내역(원)
+		salary: 9000,
 	};
 
-	handleAddLog = () => {
-		this.setState({
-			// [a, ...b]
-			// 기존에 배열 b에 들어있는 데이터를 뒤로 밀고
-			// 새로 들어온 데이터를 앞으로 입력
-			timestamp: [
-				{
-					date: new Date().toLocaleDateString(),
-					time: new Date().toLocaleTimeString(),
-				},
-				...this.state.timestamp,
-			],
-		});
+	componentWillMount = () => {
+		this.startTimeLog();
 	};
 
-	logOut = async () => {
+	startTimeLog = async () => {
 		try {
-			await AsyncStorage.clear();
+			const {
+				data: { result },
+				// } = await axios.post('http://172.20.10.3:4000/timelog', {
+			} = await axios.post('http://172.20.10.5:4000/startTimelog', {
+				params: {
+					pnum: '1',
+				},
+			});
+
+			this.setState({ resultFlag: result });
 		} catch (err) {
-			console.error(err);
+			alert(err);
 		}
 	};
 
-	Timelog = async () => {
-		alert('ㅅㅂㅅㅂ');
+	handleAddLog = async () => {
+		try {
+			await this.setState({
+				timeLog: new Date().toLocaleString(),
+				timeLogList: [
+					new Date().toLocaleString(),
+					...this.state.timeLogList,
+				],
+				milliTime: new Date().getTime(),
+			});
+		} catch (err) {
+			alert(err);
+		}
 
-		const {
-			data: { result },
-			// } = await axios.post('http://70.12.225.80:4000/timelog', {
-		} = await axios.post('http://localhost:4000/timelog', {
-			params: {
-				pnum: '01054884480',
-				name: '윤영욱',
-				go: this.state.go,
-				leave: this.state.leave,
-				timelog: this.state.timelog,
-			},
-		});
-
-		this.setState({
-			timestamp: [timelog, ...this.state.timelog],
-		});
-
-		console.log(result);
-
-		return alert(result);
+		await this.sendLog();
 	};
 
-	gobuttonChange = async () => {
-		this.setState({
-			go: 1,
-			leave: '',
-			timelog: Date(),
-		});
+	sendLog = async () => {
+		try {
+			const {
+				data: { result },
+				// } = await axios.post('http://172.20.10.3:4000/timelog', {
+			} = await axios.post('http://172.20.10.5:4000/timelog', {
+				params: {
+					pnum: '1',
+					name: 'yoon',
+					resultFlag: this.state.resultFlag === '1' ? '0' : '1',
+					timeLog: this.state.timeLog,
+					milliTime: this.state.milliTime,
+				},
+			});
 
-		await console.log('go', this.state.go);
-		await console.log('leave', this.state.leave);
-		await console.log('timelog : ', this.state.timelog);
-
-		await this.Timelog();
-	};
-
-	leavebuttonChange = async () => {
-		await this.setState({
-			go: '',
-			leave: 1,
-			timelog: Date(),
-		});
-		await console.log('go', this.state.go);
-		await console.log('leave', this.state.leave);
-		await console.log('timelog', this.state.timelog);
-
-		await this.Timelog();
+			if (this.state.resultFlag === '1') {
+				await this.setState({ resultFlag: '0' });
+			} else {
+				await this.setState({ resultFlag: '1' });
+			}
+		} catch (err) {
+			alert(err);
+		}
 	};
 
 	render() {
@@ -104,14 +97,16 @@ export default class GoToWork extends React.Component {
 				<View style={styles.topContainer}>
 					<View style={styles.navContainer}></View>
 					<View style={styles.titleContainer}>
-						<Text style={styles.titleText}>사장님</Text>
 						<Text style={styles.titleText}>
+							{this.state.name} 님,
+						</Text>
+						<Text style={styles.titleContent}>
 							오늘의 업무 내용입니다.
 						</Text>
 					</View>
-					{this.state.go === 1 ? (
-						<View style={styles.buttonContainer}>
-							<TouchableOpacity onPress={this.leavebuttonChange}>
+					<View style={styles.buttonContainer}>
+						{this.state.resultFlag === '1' ? (
+							<TouchableOpacity onPress={this.handleAddLog}>
 								<View style={styles.buttonView}>
 									<Text
 										style={{
@@ -123,10 +118,8 @@ export default class GoToWork extends React.Component {
 									</Text>
 								</View>
 							</TouchableOpacity>
-						</View>
-					) : this.state.leave === 1 ? (
-						<View style={styles.buttonContainer}>
-							<TouchableOpacity onPress={this.gobuttonChange}>
+						) : this.state.resultFlag === '0' ? (
+							<TouchableOpacity onPress={this.handleAddLog}>
 								<View style={styles.buttonView}>
 									<Text
 										style={{
@@ -138,28 +131,57 @@ export default class GoToWork extends React.Component {
 									</Text>
 								</View>
 							</TouchableOpacity>
-						</View>
-					)}
+						) : (
+							<TouchableOpacity onPress={this.handleAddLog}>
+								<View style={styles.buttonView}>
+									<Text
+										style={{
+											color: '#FFA904',
+											fontSize: 20,
+										}}
+									>
+										ּ출•ּ퇴근 버튼
+									</Text>
+								</View>
+							</TouchableOpacity>
+						)}
+					</View>
 					<View style={styles.stateContainer}>
 						<View style={styles.leftContainer}></View>
 						<View style={styles.midContainer}>
 							<Text style={styles.stateTitleText}>
 								업무 진행 상황
 							</Text>
-							<Text style={styles.stateContentText}>90%</Text>
+							<Text style={styles.stateContentText}>
+								{this.state.workStatus}%
+							</Text>
 						</View>
 						<View style={styles.rightContainer}>
 							<Text style={styles.stateTitleText}>정산 내역</Text>
-							<Text style={styles.stateContentText}>9,000</Text>
+							<Text style={styles.stateContentText}>
+								{this.state.salary
+									.toString()
+									.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+								원
+							</Text>
 						</View>
 					</View>
 				</View>
 				<ScrollView alwaysBounceVertical="true">
 					<View style={styles.bottomContainer}>
 						<View style={styles.logContainer}>
-							<Text style={styles.logText}>
-								{this.state.timelog}
-							</Text>
+							{this.state.timeLogList.map(timeLog => {
+								return (
+									<Text style={styles.logText}>
+										{timeLog}
+									</Text>
+								);
+							})}
+							{this.state.resultFlag === '0' ? (
+								<Text style={styles.logText}>출근</Text>
+							) : (
+								<Text style={styles.logText}>퇴근</Text>
+							)}
 						</View>
 					</View>
 				</ScrollView>
@@ -214,6 +236,11 @@ const styles = StyleSheet.create({
 		// borderWidth: 1,
 	},
 	titleText: {
+		color: '#ffffff',
+		fontSize: 40,
+		fontWeight: 'bold',
+	},
+	titleContent: {
 		color: '#ffffff',
 		fontSize: 30,
 	},

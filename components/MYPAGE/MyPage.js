@@ -21,7 +21,7 @@ export default class MyPage extends React.Component {
 		return (
 			<View style={styles.container}>
 				<View style={styles.titleContainer}>
-					<Text style={styles.titleText}>마이페이지</Text>
+					<Text style={styles.titleText}>내 계약서</Text>
 				</View>
 				{/* <View style={styles.searchContainer}> */}
 				<Searchbar
@@ -300,53 +300,29 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		borderColor: '#ffffff',
 		borderWidth: 0.5,
+		borderColor: '#000000',
 		marginBottom: 10,
 		borderRadius: 20,
 		minHeight: 70,
 		maxWidth: '98%',
 		alignItems: 'center',
-		elevation: 1,
-		shadowColor: '#d3d3d3',
-		shadowOffset: { width: 2, height: 2 },
-		shadowOpacity: 1,
-		shadowRadius: 2,
 	},
 	itemLeft: {
 		flex: 1,
 		alignItems: 'center',
-		// shadowColor: '#ffffff',
-		shadowOffset: { width: 0, height: 0 },
-		shadowOpacity: 0,
-		shadowRadius: 0,
 	},
 	itemMid: {
 		flex: 3,
-		// shadowColor: '#ffffff',
-		shadowOffset: { width: 0, height: 0 },
-		shadowOpacity: 0,
-		shadowRadius: 0,
 	},
 	itemRight: {
 		flex: 1,
 		alignItems: 'center',
-		// shadowColor: '#ffffff',
-		shadowOffset: { width: 0, height: 0 },
-		shadowOpacity: 0,
-		shadowRadius: 0,
 	},
 	itemName: {
 		fontWeight: 'bold',
 		paddingBottom: 5,
-		// shadowColor: '#ffffff',
-		shadowOffset: { width: 0, height: 0 },
-		shadowOpacity: 0,
-		shadowRadius: 0,
 	},
 	itemPeriod: {
 		color: '#808080',
-		// shadowColor: '#ffffff',
-		shadowOffset: { width: 0, height: 0 },
-		shadowOpacity: 0,
-		shadowRadius: 0,
 	},
 });
