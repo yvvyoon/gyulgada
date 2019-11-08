@@ -5,25 +5,79 @@ import {
 	View,
 	ScrollView,
 	TouchableOpacity,
+	Modal,
+	Alert,
 } from 'react-native';
 import { Searchbar } from 'react-native-paper';
-
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import axios from 'axios';
+
+import Contract from './Contract';
 
 export default class MyPage extends React.Component {
 	state = {
 		firstQuery: '',
+		contracts: [],
+		modalVisible: false,
 	};
+
+	componentDidMount() {
+		this.getContracts();
+	}
+
+	getContracts = async () => {
+		try {
+			const {
+				data: { contract },
+			} = await axios.get('http://172.20.10.3:4000/contract/query');
+
+			this.setState({
+				contracts: contract,
+			});
+		} catch (err) {
+			alert(err);
+		}
+	};
+
+	setModalVisible(visible) {
+		this.setState({ modalVisible: visible });
+	}
+
 	render() {
 		const { firstQuery } = this.state;
 
 		return (
 			<View style={styles.container}>
+				<Modal
+					animationType="slide"
+					transparent={false}
+					visible={this.state.modalVisible}
+					onRequestClose={() => {
+						Alert.alert('Modal has been closed.');
+					}}
+				>
+					<View style={{ marginTop: 50 }}>
+						<Contract setModalVisible={this.setModalVisible} />
+						{/* <View>
+							<Text>Hello World!</Text>
+
+							<TouchableOpacity
+								onPress={() => {
+									this.setModalVisible(
+										!this.state.modalVisible,
+									);
+								}}
+							>
+								<Text>Hide Modal</Text>
+							</TouchableOpacity>
+						</View> */}
+					</View>
+				</Modal>
+
 				<View style={styles.titleContainer}>
 					<Text style={styles.titleText}>내 계약서</Text>
 				</View>
-				{/* <View style={styles.searchContainer}> */}
 				<Searchbar
 					placeholder="사업장명을 검색하세요."
 					onChangeText={query => {
@@ -31,7 +85,6 @@ export default class MyPage extends React.Component {
 					}}
 					value={firstQuery}
 				/>
-				{/* </View> */}
 				<ScrollView
 					horizontal="true"
 					showsHorizontalScrollIndicator="false"
@@ -45,26 +98,44 @@ export default class MyPage extends React.Component {
 						</TouchableOpacity>
 						<TouchableOpacity>
 							<View style={styles.dayButton}>
-								<Text style={styles.day}>05</Text>
-								<Text style={styles.month}>May</Text>
+								<Text style={styles.day}>06</Text>
+								<Text style={styles.month}>Jun</Text>
 							</View>
 						</TouchableOpacity>
 						<TouchableOpacity>
 							<View style={styles.dayButton}>
-								<Text style={styles.day}>05</Text>
-								<Text style={styles.month}>May</Text>
+								<Text style={styles.day}>07</Text>
+								<Text style={styles.month}>Jul</Text>
 							</View>
 						</TouchableOpacity>
 						<TouchableOpacity>
 							<View style={styles.dayButton}>
-								<Text style={styles.day}>05</Text>
-								<Text style={styles.month}>May</Text>
+								<Text style={styles.day}>08</Text>
+								<Text style={styles.month}>Aug</Text>
 							</View>
 						</TouchableOpacity>
 						<TouchableOpacity>
 							<View style={styles.dayButton}>
-								<Text style={styles.day}>05</Text>
-								<Text style={styles.month}>May</Text>
+								<Text style={styles.day}>09</Text>
+								<Text style={styles.month}>Sep</Text>
+							</View>
+						</TouchableOpacity>
+						<TouchableOpacity>
+							<View style={styles.dayButton}>
+								<Text style={styles.day}>10</Text>
+								<Text style={styles.month}>Oct</Text>
+							</View>
+						</TouchableOpacity>
+						<TouchableOpacity>
+							<View style={styles.dayButton}>
+								<Text style={styles.day}>11</Text>
+								<Text style={styles.month}>Nov</Text>
+							</View>
+						</TouchableOpacity>
+						<TouchableOpacity>
+							<View style={styles.dayButton}>
+								<Text style={styles.day}>12</Text>
+								<Text style={styles.month}>Dem</Text>
 							</View>
 						</TouchableOpacity>
 					</View>
@@ -74,138 +145,42 @@ export default class MyPage extends React.Component {
 					showsVerticalScrollIndicator="false"
 				>
 					<View style={styles.itemContainer}>
-						<TouchableOpacity>
-							<View style={styles.itemButton}>
-								<View style={styles.itemLeft}>
-									<AntDesign name="checkcircle" size="30" />
-								</View>
-								<View style={styles.itemMid}>
-									<Text style={styles.itemName}>
-										남동영농조합
-									</Text>
-									<Text style={styles.itemPeriod}>
-										05월 01일 (화) - 05월 03월 (목)
-									</Text>
-								</View>
-								<View style={styles.itemRight}>
-									<SimpleLineIcons
-										name="arrow-right"
-										size="15"
-										color="#d3d3d3"
-									/>
-								</View>
-							</View>
-						</TouchableOpacity>
-						<TouchableOpacity>
-							<View style={styles.itemButton}>
-								<View style={styles.itemLeft}>
-									<AntDesign name="checkcircle" size="30" />
-								</View>
-								<View style={styles.itemMid}>
-									<Text style={styles.itemName}>
-										남동영농조합
-									</Text>
-									<Text style={styles.itemPeriod}>
-										05월 01일 (화) - 05월 03월 (목)
-									</Text>
-								</View>
-								<View style={styles.itemRight}>
-									<SimpleLineIcons
-										name="arrow-right"
-										size="15"
-										color="#d3d3d3"
-									/>
-								</View>
-							</View>
-						</TouchableOpacity>
-						<TouchableOpacity>
-							<View style={styles.itemButton}>
-								<View style={styles.itemLeft}>
-									<AntDesign name="checkcircle" size="30" />
-								</View>
-								<View style={styles.itemMid}>
-									<Text style={styles.itemName}>
-										남동영농조합
-									</Text>
-									<Text style={styles.itemPeriod}>
-										05월 01일 (화) - 05월 03월 (목)
-									</Text>
-								</View>
-								<View style={styles.itemRight}>
-									<SimpleLineIcons
-										name="arrow-right"
-										size="15"
-										color="#d3d3d3"
-									/>
-								</View>
-							</View>
-						</TouchableOpacity>
-						<TouchableOpacity>
-							<View style={styles.itemButton}>
-								<View style={styles.itemLeft}>
-									<AntDesign name="checkcircle" size="30" />
-								</View>
-								<View style={styles.itemMid}>
-									<Text style={styles.itemName}>
-										남동영농조합
-									</Text>
-									<Text style={styles.itemPeriod}>
-										05월 01일 (화) - 05월 03월 (목)
-									</Text>
-								</View>
-								<View style={styles.itemRight}>
-									<SimpleLineIcons
-										name="arrow-right"
-										size="15"
-										color="#d3d3d3"
-									/>
-								</View>
-							</View>
-						</TouchableOpacity>
-						<TouchableOpacity>
-							<View style={styles.itemButton}>
-								<View style={styles.itemLeft}>
-									<AntDesign name="checkcircle" size="30" />
-								</View>
-								<View style={styles.itemMid}>
-									<Text style={styles.itemName}>
-										남동영농조합
-									</Text>
-									<Text style={styles.itemPeriod}>
-										05월 01일 (화) - 05월 03월 (목)
-									</Text>
-								</View>
-								<View style={styles.itemRight}>
-									<SimpleLineIcons
-										name="arrow-right"
-										size="15"
-										color="#d3d3d3"
-									/>
-								</View>
-							</View>
-						</TouchableOpacity>
-						<TouchableOpacity>
-							<View style={styles.itemButton}>
-								<View style={styles.itemLeft}>
-									<AntDesign name="checkcircle" size="30" />
-								</View>
-								<View style={styles.itemMid}>
-									<Text style={styles.itemName}>
-										남동영농조합
-									</Text>
-									<Text style={styles.itemPeriod}>
-										05월 01일 (화) - 05월 03월 (목)
-									</Text>
-								</View>
-								<View style={styles.itemRight}>
-									<SimpleLineIcons
-										name="arrow-right"
-										size="15"
-										color="#d3d3d3"
-									/>
-								</View>
-							</View>
-						</TouchableOpacity>
+						{this.state.contracts.map(item => {
+							return (
+								<TouchableOpacity
+									onPress={() => {
+										this.setModalVisible(true);
+									}}
+								>
+									<View style={styles.itemButton}>
+										<View style={styles.itemLeft}>
+											<AntDesign
+												name="checkcircle"
+												size="30"
+											/>
+										</View>
+										<View style={styles.itemMid}>
+											<Text style={styles.itemPeriod}>
+												{item.startDate}
+											</Text>
+											<Text style={styles.itemPeriod}>
+												{item.endDate}
+											</Text>
+											<Text style={styles.itemPeriod}>
+												{item.salary}
+											</Text>
+										</View>
+										<View style={styles.itemRight}>
+											<SimpleLineIcons
+												name="arrow-right"
+												size="15"
+												color="#d3d3d3"
+											/>
+										</View>
+									</View>
+								</TouchableOpacity>
+							);
+						})}
 					</View>
 				</ScrollView>
 			</View>

@@ -10,6 +10,7 @@ import GoToWork from './components/WORK/GoToWork';
 import MyPage from './components/MYPAGE/MyPage';
 import Schedule from './components/SCHEDULE/Schedule';
 import Setting from './components/SETTING/Setting';
+import Modal from './components/MYPAGE/Modal';
 import TypePhone from './TypePhone';
 import App from './App';
 
@@ -30,7 +31,8 @@ import Main from './components/WORK/Main';
 const BottomTabNavigator = createBottomTabNavigator({
 	출퇴근: {
 		// screen: GoToWork,
-		screen: Schedule,
+		// screen: Schedule,
+		screen: GoToWork,
 		navigationOptions: {
 			tabBarOptions: {
 				activeTintColor: '#FFA904',
