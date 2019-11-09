@@ -6,6 +6,7 @@ import {
 	ScrollView,
 	TouchableOpacity,
 	AsyncStorage,
+	StatusBar,
 } from 'react-native';
 import axios from 'axios';
 
@@ -29,23 +30,25 @@ export default class GoToWork extends React.Component {
 		salary: 9000,
 	};
 
-	componentWillMount = () => {
-		this.startTimeLog();
-
-		AsyncStorage.getItem('name')
+	componentWillMount = async () => {
+		// await alert("ㅁㄴㅇㅁㄴㅇ");
+		await AsyncStorage.getItem('name')
 			.then(result => {
 				this.setState({ name: result });
 			})
 			.catch(err => {
 				alert(err);
 			});
-		AsyncStorage.getItem('pubKey')
+
+		await AsyncStorage.getItem('pubKey')
 			.then(result => {
 				this.setState({ pubKey: result });
 			})
 			.catch(err => {
 				alert(err);
 			});
+
+		await this.startTimeLog();
 	};
 
 	startTimeLog = async () => {
@@ -53,9 +56,9 @@ export default class GoToWork extends React.Component {
 			const {
 				data: { result },
 				// } = await axios.post('http://192.168.11.146:4000/startTimelog', {
-			} = await axios.post('http://192.168.11.150:4000/startTimelog', {
+			} = await axios.post('http://192.168.11.146:4000/startTimelog', {
 				params: {
-					pnum: '1',
+					pubKey: this.state.pubKey,
 				},
 			});
 
@@ -69,7 +72,7 @@ export default class GoToWork extends React.Component {
 	// 	try {
 	// 		await axios.post('http://192.168.11.150/totalTimelog', {
 	// 			params: {
-
+	//
 	// 			}
 	// 		}
 	// 	}
@@ -96,9 +99,9 @@ export default class GoToWork extends React.Component {
 		try {
 			const {
 				data: { result },
-			} = await axios.post('http://192.168.11.150:4000/timelog', {
+			} = await axios.post('http://192.168.11.146:4000/timelog', {
 				params: {
-					pnum: '1',
+					pubKey: this.state.pubKey,
 					name: '',
 					resultFlag: this.state.resultFlag === '1' ? '0' : '1',
 					timeLog: this.state.timeLog,
@@ -119,6 +122,7 @@ export default class GoToWork extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
+				<StatusBar barStyle="light-content" />
 				<View style={styles.topContainer}>
 					<View style={styles.navContainer}></View>
 					<View style={styles.titleContainer}>
@@ -165,7 +169,7 @@ export default class GoToWork extends React.Component {
 											fontSize: 20,
 										}}
 									>
-										ּ출•ּ퇴근 버튼
+										출•ּ퇴근 버튼
 									</Text>
 								</View>
 							</TouchableOpacity>
