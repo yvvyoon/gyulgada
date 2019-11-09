@@ -6,17 +6,13 @@ import {
 	TouchableOpacity,
 	AsyncStorage,
 } from 'react-native';
+import { reload } from 'expo/build/Updates/Updates';
 
 export default Setting = () => {
-	logout = async () => {
-		try {
-			await AsyncStorage.clear();
-		} catch (err) {
-			console.error(err);
-			alert(err);
-		}
+	logout = () => {
+		AsyncStorage.clear();
 
-		/* this.props.navigation.navigate('Main'); */
+		reload();
 	};
 
 	return (
@@ -29,6 +25,7 @@ export default Setting = () => {
 			>
 				<Text style={styles.buttonText}>알림 설정</Text>
 			</TouchableOpacity>
+
 			<TouchableOpacity
 				style={styles.button}
 				onPress={() => {
@@ -37,6 +34,7 @@ export default Setting = () => {
 			>
 				<Text style={styles.buttonText}>위치 설정</Text>
 			</TouchableOpacity>
+
 			<TouchableOpacity style={styles.button} onPress={this.logout}>
 				<Text style={styles.buttonText}>로그아웃</Text>
 			</TouchableOpacity>

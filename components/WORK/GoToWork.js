@@ -12,7 +12,8 @@ import axios from 'axios';
 export default class GoToWork extends React.Component {
 	state = {
 		pnum: '',
-		name: '윤영욱',
+		name: '',
+		pubKey: '',
 		// 출근퇴근 여부
 		// 0 : 출근
 		// 1 : 퇴근
@@ -23,21 +24,36 @@ export default class GoToWork extends React.Component {
 		// getTime()
 		milliTime: '',
 		// 업무 진행 상황(%)
-		workStatus: 85,
+		workStatus: '',
 		// 정산 내역(원)
 		salary: 9000,
 	};
 
 	componentWillMount = () => {
 		this.startTimeLog();
+
+		AsyncStorage.getItem('name')
+			.then(result => {
+				this.setState({ name: result });
+			})
+			.catch(err => {
+				alert(err);
+			});
+		AsyncStorage.getItem('pubKey')
+			.then(result => {
+				this.setState({ pubKey: result });
+			})
+			.catch(err => {
+				alert(err);
+			});
 	};
 
 	startTimeLog = async () => {
 		try {
 			const {
 				data: { result },
-				// } = await axios.post('http://172.20.10.3:4000/timelog', {
-			} = await axios.post('http://172.20.10.5:4000/startTimelog', {
+				// } = await axios.post('http://192.168.11.146:4000/startTimelog', {
+			} = await axios.post('http://192.168.11.150:4000/startTimelog', {
 				params: {
 					pnum: '1',
 				},
@@ -48,6 +64,16 @@ export default class GoToWork extends React.Component {
 			alert(err);
 		}
 	};
+
+	// totalTimeLog = async () => {
+	// 	try {
+	// 		await axios.post('http://192.168.11.150/totalTimelog', {
+	// 			params: {
+
+	// 			}
+	// 		}
+	// 	}
+	// };
 
 	handleAddLog = async () => {
 		try {
@@ -70,11 +96,10 @@ export default class GoToWork extends React.Component {
 		try {
 			const {
 				data: { result },
-				// } = await axios.post('http://172.20.10.3:4000/timelog', {
-			} = await axios.post('http://172.20.10.5:4000/timelog', {
+			} = await axios.post('http://192.168.11.150:4000/timelog', {
 				params: {
 					pnum: '1',
-					name: 'yoon',
+					name: '',
 					resultFlag: this.state.resultFlag === '1' ? '0' : '1',
 					timeLog: this.state.timeLog,
 					milliTime: this.state.milliTime,
@@ -174,14 +199,18 @@ export default class GoToWork extends React.Component {
 								return (
 									<Text style={styles.logText}>
 										{timeLog}
+										{this.state.resultFlag === '0' ? (
+											<Text style={styles.logText}>
+												출근
+											</Text>
+										) : (
+											<Text style={styles.logText}>
+												퇴근
+											</Text>
+										)}
 									</Text>
 								);
 							})}
-							{this.state.resultFlag === '0' ? (
-								<Text style={styles.logText}>출근</Text>
-							) : (
-								<Text style={styles.logText}>퇴근</Text>
-							)}
 						</View>
 					</View>
 				</ScrollView>

@@ -9,10 +9,15 @@ import {
 	TouchableWithoutFeedback,
 	TouchableOpacity,
 	AsyncStorage,
+	Modal,
 } from 'react-native';
 import axios from 'axios';
+import { reload } from 'expo/build/Updates/Updates';
+import { relativeTimeThreshold } from 'moment';
+import { StackNavigator } from 'react-navigation';
 
-// 아무 곳이나 터치하면 키보드 숨기는 기능
+import SignUp from './signUp';
+
 const DismissKeyboard = ({ children }) => (
 	<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
 		{children}
@@ -21,31 +26,27 @@ const DismissKeyboard = ({ children }) => (
 
 export default class TypePhone extends React.Component {
 	state = {
+		pubKey: '',
 		pnum: '',
-		pw: '',
+		name: '',
+		modalVisible: false,
 	};
 
-	_signInAsync = async () => {
-		await AsyncStorage.setItem('userToken', 'abc');
-
-		this.props.navigation.navigate('Index');
+	setModalVisible = () => {
+		this.setState({ modalVisible: !this.state.modalVisible });
 	};
 
-	login = async () => {
-		const {
-			data: { result, pnum, name },
-		} = await axios.post('http://70.12.225.80:4000/login', {
-			params: {
-				pnum: this.state.pnum,
-			},
-		});
+	// _signInAsync = async () => {
+	// 	await AsyncStorage.setItem('userToken', 'abc');
 
-		console.log('pnum : ', pnum);
+	// 	this.props.navigation.navigate('Index');
+	// };
 
-		if (result === 1) {
-			await AsyncStorage.setItem('pnum', pnum);
-		}
-	};
+	// _signUpAsync = async () => {
+	// 	// await AsyncStorage.setItem('userToken', 'abc');
+
+	// 	this.props.navigation.navigate('SignUp');
+	// };
 
 	onChange = e => {
 		this.setState({
@@ -53,33 +54,84 @@ export default class TypePhone extends React.Component {
 		});
 	};
 
+	login = async () => {
+		const {
+			data: { result, name, pubKey },
+			// } = await axios.post('http://192.168.11.146:4000/login', {
+		} = await axios.post('http://192.168.11.150:4000/login', {
+			params: {
+				pnum: this.state.pnum,
+			},
+		});
+
+		// this.setState({
+		// 	name: name,
+		// });
+
+		if (result === 1) {
+			await AsyncStorage.setItem('pubKey', pubKey);
+			await AsyncStorage.setItem('name', name);
+
+			reload();
+		}
+
+		if (!result) {
+			alert('회원 아님');
+		}
+	};
+
 	render() {
 		return (
-			<DismissKeyboard>
-				<View style={styles.container}>
-					{/* 키보드를 띄우면 방해되지 않도록 하면을 올리는 View */}
-					<KeyboardAvoidingView behavior="position">
-						<View style={styles.halfContainer}>
-							<Text style={styles.title}>
-								휴대폰 번호를 입력해주세요.
-							</Text>
-							<TextInput
-								style={styles.textInput}
-								keyboardType="number-pad"
-								placeholder="하이픈(-) 없이 입력해주세요."
-								// value={this.state.pnum}
-								onChangeText={pnum => this.onChange(pnum)}
-							></TextInput>
-							<TouchableOpacity
-								style={styles.submitButton}
-								onPress={this.login}
-							>
-								<Text style={styles.submitText}>다 음</Text>
-							</TouchableOpacity>
-						</View>
-					</KeyboardAvoidingView>
-				</View>
-			</DismissKeyboard>
+			<View style={styles.container}>
+				<Modal
+					animationType="slide"
+					transparent={false}
+					visible={this.state.modalVisible}
+					onRequestClose={() => {
+						Alert.alert('Modal has been closed.');
+					}}
+				>
+					<View style={{ marginTop: 50 }}>
+						<SignUp setModalVisible={this.setModalVisible} />
+					</View>
+				</Modal>
+				<DismissKeyboard>
+					<View style={styles.container}>
+						{/* 키보드를 띄우면 방해되지 않도록 하면을 올리는 View */}
+						<KeyboardAvoidingView behavior="position">
+							<View style={styles.halfContainer}>
+								<Text style={styles.title}>
+									휴대폰 번호를 입력해주세요.
+								</Text>
+								<TextInput
+									style={styles.textInput}
+									keyboardType="number-pad"
+									placeholder="하이픈(-) 없이 입력해주세요."
+									// value={this.state.pnum}
+
+									onChangeText={pnum => this.onChange(pnum)}
+								></TextInput>
+								<TouchableOpacity
+									style={styles.submitButton}
+									onPress={this.login}
+								>
+									<Text style={styles.submitText}>
+										로그인
+									</Text>
+								</TouchableOpacity>
+								<TouchableOpacity
+									style={styles.submitButton}
+									onPress={this.setModalVisible}
+								>
+									<Text style={styles.submitText}>
+										회원가입
+									</Text>
+								</TouchableOpacity>
+							</View>
+						</KeyboardAvoidingView>
+					</View>
+				</DismissKeyboard>
+			</View>
 		);
 	}
 }

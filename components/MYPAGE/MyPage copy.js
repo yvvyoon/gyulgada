@@ -28,10 +28,6 @@ export default class MyPage extends React.Component {
 		endDate: '',
 		startTime: '',
 		endTime: '',
-		pnum: '',
-		name: '',
-		birth: '',
-		userType: '',
 	};
 
 	componentDidMount() {
@@ -42,7 +38,7 @@ export default class MyPage extends React.Component {
 		try {
 			const {
 				data: { contract },
-			} = await axios.get('http://192.168.11.150:4000/queryContract');
+			} = await axios.get('http://172.20.10.3:4000/contract/query');
 
 			this.setState({
 				contracts: contract,
@@ -71,6 +67,19 @@ export default class MyPage extends React.Component {
 				>
 					<View style={{ marginTop: 50 }}>
 						<Contract setModalVisible={this.setModalVisible} />
+						{/* <View>
+							<Text>Hello World!</Text>
+
+							<TouchableOpacity
+								onPress={() => {
+									this.setModalVisible(
+										!this.state.modalVisible,
+									);
+								}}
+							>
+								<Text>Hide Modal</Text>
+							</TouchableOpacity>
+						</View> */}
 					</View>
 				</Modal>
 
@@ -204,7 +213,7 @@ const styles = StyleSheet.create({
 	searchContainer: {
 		flex: 1,
 		// borderColor: '#000000',
-		// borderWidth: 1,[]
+		// borderWidth: 1,
 		minHeight: '15%',
 	},
 	dayContainer: {

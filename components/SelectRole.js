@@ -23,7 +23,6 @@ export default class SelectRole extends React.Component {
 								size="80"
 								color="orange"
 							></FontAwesome>
-							{/* <Text style={styles.itemText}>근로자</Text> */}
 						</TouchableOpacity>
 					</View>
 					<View style={styles.rightItem}>
@@ -37,7 +36,6 @@ export default class SelectRole extends React.Component {
 								size="80"
 								color="orange"
 							></Foundation>
-							{/* <Text style={styles.itemText}>사업주</Text> */}
 						</TouchableOpacity>
 					</View>
 				</View>

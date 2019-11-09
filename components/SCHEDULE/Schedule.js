@@ -9,7 +9,6 @@ export default class Schedule extends React.Component {
 		this.state = {
 			selectedStartDate: null,
 			selectedEndDate: null,
-			workCount: 2,
 			list: [
 				{
 					name: '영찬이네 감귤',
@@ -141,9 +140,6 @@ export default class Schedule extends React.Component {
 						showsVerticalScrollIndicator="false"
 					>
 						<View style={styles.listContentContainer}>
-							{/* <Text style={styles.name}>{startDate}</Text>
-							<Text style={styles.name}>{endDate}</Text> */}
-
 							{this.state.list.map(item => {
 								return (
 									<View style={styles.listContentContainer}>
@@ -194,6 +190,7 @@ const styles = StyleSheet.create({
 	},
 	listContainer: {
 		maxHeight: '40%',
+		minHeight: '50%',
 		paddingHorizontal: 30,
 		paddingTop: 30,
 	},
